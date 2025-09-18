@@ -3,7 +3,6 @@ import { ApiError } from "./handleApiError";
 
 export const getErrorInfo = (error: ApiError) => {
   const message = error.message.toLowerCase();
-  console.log(error);
 
   if (message.includes("network") || message.includes("fetch")) {
     return {

@@ -28,7 +28,6 @@ export default function OrderQuotaSection() {
 
   const remainingOrder = quotaData?.data?.orders || 0;
 
-  console.log(quotaData);
 
   return (
     <div className="mb-8 flex">

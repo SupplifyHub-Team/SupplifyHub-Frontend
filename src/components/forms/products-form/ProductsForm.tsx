@@ -53,7 +53,6 @@ export default function ProductsForm() {
     price > 0 && offer ? Math.round(((price - offer) / price) * 100) : 0;
 
   function onSubmit(values: addProductSchemaOutput) {
-    console.log(values);
     postProduct(values, {
       onSuccess: () => {
         form.reset();

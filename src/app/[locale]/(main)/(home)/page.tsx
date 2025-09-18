@@ -12,14 +12,23 @@ import CarouselSection from "@/components/CarouselSection";
 import PricingSection from "./_components/sections/pricing-plans/PricingSection";
 import { homeMetadata } from "@/config/metadata";
 
-
 export const metadata = homeMetadata;
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export default async function HomePage() {
-  const categories = await getCategoriesServer();
-  const advertisements = await fetchAdvertisements();
+  const [categoriesResult, advertisementsResult] = await Promise.allSettled([
+    getCategoriesServer(),
+    fetchAdvertisements(),
+  ]);
+
+  const categories =
+    categoriesResult.status === "fulfilled" ? categoriesResult.value : [];
+
+  const advertisements =
+    advertisementsResult.status === "fulfilled"
+      ? advertisementsResult.value
+      : [];
   return (
     <>
       <StructuredData />

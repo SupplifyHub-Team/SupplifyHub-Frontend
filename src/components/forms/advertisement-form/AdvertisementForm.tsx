@@ -31,7 +31,6 @@ export default function AdvertisementForm() {
       },
     });
   }
-  console.log(error);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

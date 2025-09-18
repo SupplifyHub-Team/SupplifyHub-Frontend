@@ -24,7 +24,6 @@ export default function ContactUsForm() {
   });
 
   const onSubmit = (data: contactSchema) => {
-    console.log("Contact form submitted:", data);
     mutate(data, {
       onSuccess: () => {
         form.reset();

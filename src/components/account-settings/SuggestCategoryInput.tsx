@@ -19,7 +19,6 @@ export default function SuggestCategoryInput() {
 
     if (!categoryName.trim()) return;
 
-    console.log(categoryName);
 
     suggestCategory(
       { name: categoryName.trim() },
