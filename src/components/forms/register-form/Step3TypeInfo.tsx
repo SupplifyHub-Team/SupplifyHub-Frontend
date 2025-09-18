@@ -94,16 +94,17 @@ export function Step3TypeInfo() {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
               <Tag className="w-5 h-5 text-indigo-600" />
-              ما هي خدماتك؟
+              ما هي منتجات او خدمات شركتك
             </h3>
             <p className="text-gray-600 mb-6">
-              اختر الخدمات التي تقدمها (يمكنك اختيار أكثر من خدمة)
+              اختر الفئات المرتبطة بنشاط شركتك (بمكنك اختيار اكثر من فئة من
+              القائمة ادناه)
             </p>
 
             <FormInfiniteMultiCombobox<conditionalRegisterSchemaType, ICategory>
               control={control}
               name="categories"
-              label="الخدمات"
+              label="قائمة الفئات"
               queryKey={["categories"]}
               fetchFn={(pageNumber, search) =>
                 getCategories({
