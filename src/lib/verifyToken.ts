@@ -1,4 +1,4 @@
-import { jwtVerify, JWTVerifyResult } from "jose";
+import { jwtVerify, JWTVerifyResult, decodeJwt } from "jose";
 import { JWSSignatureVerificationFailed, JWTExpired } from "jose/errors";
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
@@ -14,12 +14,17 @@ export async function verifyToken(token?: string) {
         algorithms: ["HS256"],
       }
     );
-    return decoded;
+    return decoded; 
   } catch (err: unknown) {
     if (err instanceof JWTExpired) {
-      console.error("Token expired:", err);
+      console.warn("⚠️ Token expired, decoding without verification");
+      // still return decoded payload even if expired
+      return {
+        payload: decodeJwt(token) as IJwtPayload,
+        protectedHeader: {},
+      } as JWTVerifyResult<IJwtPayload>;
     } else if (err instanceof JWSSignatureVerificationFailed) {
-      console.error("Invalid signature:", err);
+      console.error("❌ Invalid signature:", err);
     } else if (err instanceof Error) {
       console.error("JWT verification failed:", err.message);
     } else {

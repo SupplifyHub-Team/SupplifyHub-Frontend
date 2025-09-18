@@ -6,7 +6,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { Control, FieldValues, Path, useFormContext } from "react-hook-form";
+import { FieldValues, Path, useFormContext } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import {
   Command,
@@ -97,7 +97,7 @@ export default function FormInfiniteCombobox<
                     variant="outline"
                     role="combobox"
                     className={cn(
-                      "w-full justify-between hover:scale-100",
+                      "w-full justify-between hover:scale-100   h-fit text-start",
                       className
                     )}
                     disabled={disabled}>
@@ -107,7 +107,10 @@ export default function FormInfiniteCombobox<
                     <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="p-0 " dir="rtl">
+                <PopoverContent
+                  side="bottom"
+                  align="start"
+                  className="p-0  z-[100]">
                   <Command>
                     <CommandInput
                       placeholder="ابحث..."
@@ -139,6 +142,7 @@ export default function FormInfiniteCombobox<
                           </CommandItem>
                         );
                       })}
+
                       {isFetching && (
                         <div className="flex justify-center py-2">
                           <Spinner />
