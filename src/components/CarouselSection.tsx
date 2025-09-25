@@ -35,7 +35,8 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
             </div>
 
             <h2 className="text-4xl md:text-4xl lg:text-4xl font-bold bg-gradient-to-r from-slate-800 via-indigo-700 to-purple-700 bg-clip-text text-transparent mb-2 leading-tight">
-              عروض حصرية
+            عروض حصرية واحداث و فعاليات
+            
             </h2>
           </div>
         </div>
