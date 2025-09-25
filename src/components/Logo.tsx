@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LogoImage from "../../public/photo_supplifyhup.jpg";
+import LogoImage from "../../public/logo_supplifyhup.png";
 import { Link } from "@/i18n/navigation";
 
 export default function Logo({ size = 200 }: { size?: number }) {
