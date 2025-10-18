@@ -80,13 +80,12 @@ export const step2Schema = z.object({
       message: "من فضلك أدخل رقم هاتف صالح",
     }),
 });
-
 export const step3Schema = z.object({
   location: z.string(),
   documents: z
     .instanceof(File, { message: "يجب رفع ملف صالح" })
-    .or(z.array(z.instanceof(File, { message: "كل عنصر يجب أن يكون ملف" }))),
-
+    .or(z.array(z.instanceof(File, { message: "كل عنصر يجب أن يكون ملف" })))
+    .optional(),
   categories: z.array(z.string()).min(1, {
     message: "من فضلك اختر فئة واحدة على الأقل",
   }),
