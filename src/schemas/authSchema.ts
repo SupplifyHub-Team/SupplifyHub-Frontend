@@ -108,15 +108,17 @@ export const conditionalRegisterSchema = step1Schema
       });
     }
 
-    if (!data.documents) {
-      ctx.addIssue({
-        path: ["documents"],
-        code: "too_small",
-        minimum: 1,
-        type: "array",
-        message: "من فضلك قم بتحميل مستند واحد على الأقل",
-        origin: "array",
-      });
+    if (data.documents) {
+      if (Array.isArray(data.documents) && data.documents.length === 0) {
+        ctx.addIssue({
+          path: ["documents"],
+          code: "too_small",
+          minimum: 1,
+          type: "array",
+          message: "من فضلك قم بتحميل مستند واحد على الأقل",
+          origin: "array",
+        });
+      }
     }
 
     if (!data.categories || data.categories.length < 1) {
