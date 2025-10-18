@@ -33,16 +33,25 @@ export function MultiStepForm() {
   const { mutate, isPending } = useRegister();
   const searchParams = useSearchParams();
 
+  const roleParam = searchParams.get("role");
+  const accountTypeDefault =
+    roleParam === "suppliers" ? "Suppliers" : "Clients";
+
+  const schema =
+    accountTypeDefault === "Suppliers"
+      ? conditionalRegisterSchema
+      : step1Schema.merge(step2Schema).merge(step3Schema.partial());
+
   const form = useForm<conditionalRegisterSchemaType>({
-    resolver: zodResolver(conditionalRegisterSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
-      accountType:
-        searchParams.get("role") === "suppliers" ? "Suppliers" : "Clients",
+      accountType: accountTypeDefault,
       UserName: "",
       email: "",
       password: "",
       phoneNumber: "",
       location: "",
+      categories: [],
     },
   });
 
@@ -109,12 +118,14 @@ export function MultiStepForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full">
+          className="space-y-8 w-full"
+        >
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white rounded-2xl shadow-2xl ">
+            className="bg-white rounded-2xl shadow-2xl "
+          >
             <RegistersSteps totalSteps={totalSteps} step={step} />
 
             <fieldset disabled={isPending} className="space-y-8 w-full">
@@ -133,7 +144,8 @@ export function MultiStepForm() {
                       stiffness: 300,
                       damping: 30,
                     }}
-                    className=" inset-0 p-8">
+                    className=" inset-0 p-8"
+                  >
                     {step === 0 && <Step1Type />}
                     {step === 1 && <Step2BasicInfo />}
                     {step === 2 && <Step3TypeInfo />}
@@ -159,7 +171,8 @@ export function MultiStepForm() {
                           return (
                             <li
                               key={field}
-                              className="text-red-600 text-sm flex items-start gap-1">
+                              className="text-red-600 text-sm flex items-start gap-1"
+                            >
                               <span>{error.message as string}</span>
                             </li>
                           );
@@ -178,7 +191,8 @@ export function MultiStepForm() {
                   variant="outline"
                   onClick={handleBack}
                   disabled={isFirstStep}
-                  className="transition  hover:shadow-md disabled:opacity-50">
+                  className="transition  hover:shadow-md disabled:opacity-50"
+                >
                   <ChevronRight className="w-4 h-4" />
                   السابق
                 </Button>
@@ -189,7 +203,8 @@ export function MultiStepForm() {
                     key={`submit-${step}`}
                     type="submit"
                     disabled={isPending}
-                    className=" bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition hover:shadow-lg">
+                    className=" bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition hover:shadow-lg"
+                  >
                     {isPending ? (
                       <>
                         <Spinner />
@@ -207,7 +222,8 @@ export function MultiStepForm() {
                     key={`next-${step}`}
                     type="button"
                     onClick={handleNext}
-                    className="flex items-center gap-2 px-6 py-3 rounded-xl transition hover:shadow-lg">
+                    className="flex items-center gap-2 px-6 py-3 rounded-xl transition hover:shadow-lg"
+                  >
                     التالي
                     <ChevronLeft className="w-4 h-4" />
                   </Button>

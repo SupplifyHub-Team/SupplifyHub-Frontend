@@ -108,6 +108,7 @@ export const conditionalRegisterSchema = step1Schema
       });
     }
 
+    // تحقق فقط لو الحساب مورد
     if (data.accountType === "Suppliers") {
       if (
         !data.documents ||
