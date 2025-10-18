@@ -108,15 +108,15 @@ export const conditionalRegisterSchema = step1Schema
       });
     }
 
-    if (data.documents) {
-      if (Array.isArray(data.documents) && data.documents.length === 0) {
+    if (data.accountType === "Suppliers") {
+      if (
+        !data.documents ||
+        (Array.isArray(data.documents) && data.documents.length === 0)
+      ) {
         ctx.addIssue({
           path: ["documents"],
-          code: "too_small",
-          minimum: 1,
-          type: "array",
+          code: "custom",
           message: "من فضلك قم بتحميل مستند واحد على الأقل",
-          origin: "array",
         });
       }
     }
