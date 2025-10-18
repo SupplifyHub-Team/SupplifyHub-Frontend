@@ -108,17 +108,19 @@ export const conditionalRegisterSchema = step1Schema
       });
     }
 
-    // تحقق فقط لو الحساب مورد
-    if (data.accountType === "Suppliers") {
-      if (
-        !data.documents ||
-        (Array.isArray(data.documents) && data.documents.length === 0)
-      ) {
-        ctx.addIssue({
-          path: ["documents"],
-          code: "custom",
-          message: "من فضلك قم بتحميل مستند واحد على الأقل",
-        });
+    if (data.documents) {
+      const docs = Array.isArray(data.documents)
+        ? data.documents
+        : [data.documents];
+
+      for (const file of docs) {
+        if (!(file instanceof File)) {
+          ctx.addIssue({
+            path: ["documents"],
+            code: "custom",
+            message: "الملف المرفوع غير صالح",
+          });
+        }
       }
     }
 

@@ -96,7 +96,12 @@ export function MultiStepForm() {
       values.categories?.forEach((id) => {
         formData.append("categoriesId", id);
       });
-      if (values.documents) {
+      if (
+        values.documents &&
+        (Array.isArray(values.documents)
+          ? values.documents.length > 0
+          : true)
+      ) {
         formData.append(
           "textNumberPicture",
           Array.isArray(values.documents)
@@ -104,9 +109,9 @@ export function MultiStepForm() {
             : values.documents
         );
       }
+
       formData.append("locations", values.location || "no location");
     }
-
     mutate(formData, {
       onError: (err) => {
         setFormErrors(form, err);
