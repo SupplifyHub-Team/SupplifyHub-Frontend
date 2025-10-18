@@ -83,8 +83,12 @@ export const step2Schema = z.object({
 export const step3Schema = z.object({
   location: z.string(),
   documents: z
-    .instanceof(File, { message: "يجب رفع ملف صالح" })
-    .or(z.array(z.instanceof(File, { message: "كل عنصر يجب أن يكون ملف" })))
+    .union([
+      z.instanceof(File, { message: "يجب رفع ملف صالح" }),
+      z.array(z.instanceof(File, { message: "كل عنصر يجب أن يكون ملف" })),
+      z.undefined(),
+      z.null(),
+    ])
     .optional(),
   categories: z.array(z.string()).min(1, {
     message: "من فضلك اختر فئة واحدة على الأقل",
