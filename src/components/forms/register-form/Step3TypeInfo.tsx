@@ -48,7 +48,8 @@ export function Step3TypeInfo() {
       className="flex flex-col items-center justify-center h-full space-y-8 px-4"
       variants={containerVariants}
       initial="hidden"
-      animate="visible">
+      animate="visible"
+    >
       <motion.div className="text-center space-y-4" variants={itemVariants}>
         <div className="w-16 h-16 mx-auto bg-indigo-500 rounded-2xl flex items-center justify-center mb-4">
           {accountType === "Suppliers" ? (
@@ -68,14 +69,16 @@ export function Step3TypeInfo() {
       </motion.div>
 
       <div className="w-full max-w-4xl space-y-8">
-        <FormDropzone<conditionalRegisterSchemaType>
-          control={control}
-          name="documents"
-          label="المستندات"
-          description="اقصى حجم 5MB ,قم بتحميل المستندات الداعمة مثل السجل التجاري، الهوية، وغيرها."
-          accept={{ "application/pdf": [".pdf"] }}
-          multiple={false}
-        />
+        {accountType === "Suppliers" && (
+          <FormDropzone<conditionalRegisterSchemaType>
+            control={control}
+            name="documents"
+            label="المستندات"
+            description="اقصى حجم 5MB ,قم بتحميل المستندات الداعمة مثل السجل التجاري، الهوية، وغيرها."
+            accept={{ "application/pdf": [".pdf"] }}
+            multiple={false}
+          />
+        )}
 
         {/* Location Input */}
         <FormInput<conditionalRegisterSchemaType>
@@ -123,7 +126,8 @@ export function Step3TypeInfo() {
         {/* Benefits Section */}
         <motion.div
           className="bg-gradient-to-r from-indigo-50 to-purple-50 p-8 rounded-2xl border border-indigo-200"
-          variants={itemVariants}>
+          variants={itemVariants}
+        >
           <h3 className="font-bold text-indigo-900 text-xl mb-4 flex items-center gap-2">
             <Star className="w-6 h-6 text-indigo-600" />
             {accountType === "Suppliers"
@@ -136,7 +140,8 @@ export function Step3TypeInfo() {
                 {SUPPLIER_BENFITS.map((benefit, index) => (
                   <div
                     key={index + "SUPPLIER_BENFITS"}
-                    className="flex items-center gap-3">
+                    className="flex items-center gap-3"
+                  >
                     <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
                     <span className="text-indigo-800">{benefit}</span>
                   </div>
@@ -147,7 +152,8 @@ export function Step3TypeInfo() {
                 {CLIENT_BENEFITS.map((benefit, index) => (
                   <div
                     key={index + "CLIENT_BENEFITS"}
-                    className="flex items-center gap-3">
+                    className="flex items-center gap-3"
+                  >
                     <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
                     <span className="text-indigo-800">{benefit}</span>
                   </div>

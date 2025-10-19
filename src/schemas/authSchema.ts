@@ -80,13 +80,16 @@ export const step2Schema = z.object({
       message: "من فضلك أدخل رقم هاتف صالح",
     }),
 });
-
 export const step3Schema = z.object({
   location: z.string(),
   documents: z
-    .instanceof(File, { message: "يجب رفع ملف صالح" })
-    .or(z.array(z.instanceof(File, { message: "كل عنصر يجب أن يكون ملف" }))),
-
+    .union([
+      z.instanceof(File, { message: "يجب رفع ملف صالح" }),
+      z.array(z.instanceof(File, { message: "كل عنصر يجب أن يكون ملف" })),
+      z.undefined(),
+      z.null(),
+    ])
+    .optional(),
   categories: z.array(z.string()).min(1, {
     message: "من فضلك اختر فئة واحدة على الأقل",
   }),
@@ -109,15 +112,20 @@ export const conditionalRegisterSchema = step1Schema
       });
     }
 
-    if (!data.documents) {
-      ctx.addIssue({
-        path: ["documents"],
-        code: "too_small",
-        minimum: 1,
-        type: "array",
-        message: "من فضلك قم بتحميل مستند واحد على الأقل",
-        origin: "array",
-      });
+    if (data.documents) {
+      const docs = Array.isArray(data.documents)
+        ? data.documents
+        : [data.documents];
+
+      for (const file of docs) {
+        if (!(file instanceof File)) {
+          ctx.addIssue({
+            path: ["documents"],
+            code: "custom",
+            message: "الملف المرفوع غير صالح",
+          });
+        }
+      }
     }
 
     if (!data.categories || data.categories.length < 1) {
