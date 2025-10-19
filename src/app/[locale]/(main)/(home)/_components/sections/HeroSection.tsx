@@ -22,7 +22,6 @@ export default function HeroSection() {
               <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent text-6xl">
                 SUPPLIFYHUB
               </span>
-              <p class="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent text-4xl py-2">سبليفاي</p>
             </Badge>
           </h1>
 
