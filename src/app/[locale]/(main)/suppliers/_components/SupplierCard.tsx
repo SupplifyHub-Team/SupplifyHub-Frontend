@@ -44,7 +44,7 @@ export default function SupplierCard({ supplier }: { supplier: ISupplier }) {
               </div>
             )}
 
-            <div className="absolute -bottom-1 -right-1  h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full  shadow-lg flex items-center justify-center ">
+            <div className="absolute -bottom-1 -right-1  w-8 h-8 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full  shadow-lg flex items-center justify-center ">
               <Tooltip>
                 <TooltipTrigger type="button">
                   <Verified className="size-4 text-white" />
