@@ -17,15 +17,16 @@ export default function HeroSection() {
 
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-5xl mx-auto">
-          <Badge className="inline-flex flex-col items-center bg-gradient-to-r from-indigo-50 via-purple-50 to-indigo-50 text-indigo-700 px-8 py-4 rounded-full text-4xl sm:text-7xl font-bold mb-8 border border-indigo-200/30 shadow-lg shadow-indigo-500/10 hover:shadow-xl hover:shadow-indigo-500/20 backdrop-blur-sm transition-all duration-300 hover:scale-105">
-            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent text-6xl">
-              SUPPLIFYHUB
-            </span>
-            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent text-3xl py-2">
-              سبليفاي - منصة التوريد الذكية
-            </span>
-          </Badge>
-        </div>
+          <h1 className="text-7xl md:text-7xl font-bold bg-gradient-to-r from-slate-900 via-indigo-700 to-purple-600 bg-clip-text text-transparent leading-tight mb-6">
+            <Badge className="inline-flex flex-col items-center bg-gradient-to-r from-indigo-50 via-purple-50 to-indigo-50 text-indigo-700 px-8 py-4 rounded-full text-4xl sm:text-7xl font-bold mb-8 border border-indigo-200/30 shadow-lg shadow-indigo-500/10 hover:shadow-xl hover:shadow-indigo-500/20 backdrop-blur-sm transition-all duration-300 hover:scale-105">
+              <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent text-6xl">
+                SUPPLIFYHUB
+              </span>
+              <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent text-2xl py-2">
+                سبليفاي - منصة التوريد الذكية
+              </span>
+            </Badge>
+          </h1>
 
           <p className="text-xl md:text-2xl text-slate-600 mb-12 max-w-3xl mx-auto leading-relaxed">
             منصة ذكية تربط الموردين بأصحاب الأعمال لتبسيط إدارة الطلبات، تعزيز
