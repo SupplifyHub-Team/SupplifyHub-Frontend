@@ -79,7 +79,7 @@ export default function SupplierCard({ supplier }: { supplier: ISupplier }) {
           </div>
         </div>
         {/* Categories */}
-        <div className="my-4">
+        <div className="my-4 relative flex gap-2 truncate">
           <div className="flex flex-wrap gap-3">
             {supplier?.categoryNames?.slice(0, 5).map((category, index) => (
               <Badge key={index} className="px-2  py-1 rounded-xl shadow-lg">
