@@ -55,7 +55,9 @@ const AdvertisementCarousel: React.FC<AdvertisementCarouselProps> = ({
           alt={`إعلان ${advertisement.id}`}
           fill
           className="object-contain rounded-2xl"
-          priority
+          priority={true}
+          quality={100}
+          loading={"eager"}
         />
       </div>
     );

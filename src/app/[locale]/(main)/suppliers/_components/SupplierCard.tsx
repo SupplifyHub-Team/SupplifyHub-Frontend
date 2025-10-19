@@ -44,7 +44,7 @@ export default function SupplierCard({ supplier }: { supplier: ISupplier }) {
               </div>
             )}
 
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full  shadow-lg flex items-center justify-center">
+            <div className="absolute -bottom-1 -right-1  h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full  shadow-lg flex items-center justify-center trucated w-54 ">
               <Tooltip>
                 <TooltipTrigger type="button">
                   <Verified className="size-4 text-white" />
@@ -97,7 +97,7 @@ export default function SupplierCard({ supplier }: { supplier: ISupplier }) {
         </div>
 
         {/* Locations */}
-        <div className="mb-3 relative flex gap-2">
+        <div className="mb-3 relative flex gap-2 truncate  ">
           {supplier.locations.map((location, index) => (
             <Badge
               key={index}
