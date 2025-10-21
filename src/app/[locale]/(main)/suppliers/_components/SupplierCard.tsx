@@ -80,12 +80,16 @@ export default function SupplierCard({ supplier }: { supplier: ISupplier }) {
         </div>
         {/* Categories */}
         <div className="my-4 ">
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 px-2 relative truncate py-1">
             {supplier?.categoryNames?.slice(0, 5).map((category, index) => (
-              <Badge key={index} className="px-2 relative flex gap-2 truncate py-1 rounded-xl shadow-lg">
-                <Tag />
-                {category}
-              </Badge>
+              <div key={index} className="truncate">
+                <Badge
+                  className="px-2 relative flex gap-2 truncate py-1 rounded-xl shadow-lg"
+                >
+                  <Tag />
+                  {category}
+                </Badge>
+              </div>
             ))}
             {supplier?.categoryNames?.length > 5 && (
               <Badge className="shadow-lg rounded-xl text-sm font-semibold bg-gradient-to-r from-gray-100 to-gray-200 text-gray-600 border border-gray-300/50  transition-transform duration-200">
@@ -102,7 +106,8 @@ export default function SupplierCard({ supplier }: { supplier: ISupplier }) {
             <Badge
               key={index}
               className="px-2  py-1 rounded-2xl shadow-lg!"
-              variant="outline">
+              variant="outline"
+            >
               <MapPin className="size-4" />
               {location}
             </Badge>
@@ -119,7 +124,8 @@ export default function SupplierCard({ supplier }: { supplier: ISupplier }) {
         <div className="relative flex flex-col gap-4 mt-auto">
           <Link
             href={`tel:${supplier.phoneNumber}`}
-            className="flex-1 bg-gradient-to-r from-green-50  to-emerald-50 hover:from-green-100 hover:to-emerald-100 text-green-700 px-2 py-2 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center gap-3 border border-green-200/50 hover:border-green-300/50 shadow-lg hover:shadow-xl hover:shadow-green-500/20 group/btn backdrop-blur-sm">
+            className="flex-1 bg-gradient-to-r from-green-50  to-emerald-50 hover:from-green-100 hover:to-emerald-100 text-green-700 px-2 py-2 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center gap-3 border border-green-200/50 hover:border-green-300/50 shadow-lg hover:shadow-xl hover:shadow-green-500/20 group/btn backdrop-blur-sm"
+          >
             <Phone className="size-4 group-hover/btn:scale-110 group-hover/btn:rotate-12 transition-all duration-300" />
             {supplier.phoneNumber}
           </Link>
@@ -127,7 +133,8 @@ export default function SupplierCard({ supplier }: { supplier: ISupplier }) {
             <Button
               type="button"
               variant="gradient-indigo"
-              className="w-full flex items-center gap-2">
+              className="w-full flex items-center gap-2"
+            >
               <User className="size-4 group-hover/btn:scale-110 group-hover/btn:rotate-12 transition-all duration-300" />
               عرض الملف الشخصي
             </Button>
