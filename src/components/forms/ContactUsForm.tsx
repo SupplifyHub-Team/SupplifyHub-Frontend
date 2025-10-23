@@ -39,7 +39,7 @@ export default function ContactUsForm() {
               control={form.control}
               name="name"
               label="الاسم الكامل"
-              placeholder="أدخل اسمك الكامل"
+              placeholder="أدخل اسم الشركة"
             />
             <FormInput<contactSchema>
               control={form.control}
