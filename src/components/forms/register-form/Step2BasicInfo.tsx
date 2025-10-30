@@ -49,7 +49,7 @@ export default function Step2BasicInfo() {
               control={control}
               name="UserName"
               label="الاسم الكامل"
-              placeholder="أدخل اسمك الكامل"
+              placeholder="أدخل اسم الشركة"
               Icon={<User className="w-5 h-5 text-gray-500" />}
               autoComplete="name"
             />

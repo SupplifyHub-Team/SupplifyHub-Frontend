@@ -89,7 +89,7 @@ export default function FAQSection() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="https://wa.me/9660539347368">
+                <Link href="https://wa.me/966575630804">
                   <Button
                     size="lg"
                     className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-6 py-3 rounded-full font-semibold">
