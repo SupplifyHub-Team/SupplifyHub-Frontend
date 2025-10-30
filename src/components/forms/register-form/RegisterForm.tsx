@@ -3,14 +3,14 @@
 import { useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AnimatePresence, motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 
 import {
   conditionalRegisterSchema,
-  conditionalRegisterSchemaType,
+  ConditionalRegisterSchemaType,
   step1Schema,
   step2Schema,
   step3Schema,
@@ -27,7 +27,7 @@ import { SLIDER_VARIANTS } from "@/lib/constants";
 import { setFormErrors } from "@/utils/handleApiError";
 import { useSearchParams } from "next/navigation";
 
-export function MultiStepForm() {
+export default function MultiStepForm() {
   const [step, setStep] = useState<number>(0);
   const directionRef = useRef<"next" | "back">("next");
   const { mutate, isPending } = useRegister();
@@ -35,26 +35,26 @@ export function MultiStepForm() {
 
   const roleParam = searchParams.get("role");
   const accountTypeDefault =
-  roleParam === "suppliers" ? "Suppliers" : "Clients";
+    roleParam === "suppliers" ? "Suppliers" : "Clients";
 
 const schema =
   accountTypeDefault === "Suppliers"
     ? conditionalRegisterSchema
-    : step1Schema.merge(step2Schema).merge(step3Schema.partial());
+    : step1Schema.merge(step2Schema);
 
-const form = useForm<conditionalRegisterSchemaType>({
-  resolver: zodResolver(schema),
-  defaultValues: {
-    accountType: accountTypeDefault,
-    UserName: "",
-    email: "",
-    password: "",
-    phoneNumber: "",
-    location: "",
-    categories: accountTypeDefault === "Suppliers" ? [] : undefined,
-  },
-});
 
+  const form = useForm<ConditionalRegisterSchemaType>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      accountType: accountTypeDefault,
+      UserName: "",
+      email: "",
+      password: "",
+      phoneNumber: "",
+      location: "",
+      categories: accountTypeDefault === "Suppliers" ? [] : undefined,
+    },
+  });
 
   const accountType = form.watch("accountType");
   const stepSchemas = useMemo(() => {
@@ -71,7 +71,7 @@ const form = useForm<conditionalRegisterSchemaType>({
   async function handleNext() {
     const currentStepFields = Object.keys(
       stepSchemas[step].shape
-    ) as (keyof conditionalRegisterSchemaType)[];
+    ) as (keyof ConditionalRegisterSchemaType)[];
 
     const isStepValid = await form.trigger(currentStepFields);
     if (isStepValid) {
@@ -85,7 +85,7 @@ const form = useForm<conditionalRegisterSchemaType>({
     setStep((prev) => Math.max(prev - 1, 0));
   }
 
-  async function onSubmit(values: conditionalRegisterSchemaType) {
+  async function onSubmit(values: ConditionalRegisterSchemaType) {
     const formData = new FormData();
     formData.append("accountType", values.accountType);
     formData.append("UserName", values.UserName);
@@ -99,9 +99,7 @@ const form = useForm<conditionalRegisterSchemaType>({
       });
       if (
         values.documents &&
-        (Array.isArray(values.documents)
-          ? values.documents.length > 0
-          : true)
+        (Array.isArray(values.documents) ? values.documents.length > 0 : true)
       ) {
         formData.append(
           "textNumberPicture",
