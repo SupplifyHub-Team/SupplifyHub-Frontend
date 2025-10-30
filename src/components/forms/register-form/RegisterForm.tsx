@@ -35,25 +35,26 @@ export function MultiStepForm() {
 
   const roleParam = searchParams.get("role");
   const accountTypeDefault =
-    roleParam === "suppliers" ? "Suppliers" : "Clients";
+  roleParam === "suppliers" ? "Suppliers" : "Clients";
 
-  const schema =
-    accountTypeDefault === "Suppliers"
-      ? conditionalRegisterSchema
-      : step1Schema.merge(step2Schema).merge(step3Schema.partial());
+const schema =
+  accountTypeDefault === "Suppliers"
+    ? conditionalRegisterSchema
+    : step1Schema.merge(step2Schema).merge(step3Schema.partial());
 
-  const form = useForm<conditionalRegisterSchemaType>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      accountType: accountTypeDefault,
-      UserName: "",
-      email: "",
-      password: "",
-      phoneNumber: "",
-      location: "",
-      categories: [],
-    },
-  });
+const form = useForm<conditionalRegisterSchemaType>({
+  resolver: zodResolver(schema),
+  defaultValues: {
+    accountType: accountTypeDefault,
+    UserName: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+    location: "",
+    categories: accountTypeDefault === "Suppliers" ? [] : undefined,
+  },
+});
+
 
   const accountType = form.watch("accountType");
   const stepSchemas = useMemo(() => {
