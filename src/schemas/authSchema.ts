@@ -101,17 +101,19 @@ export const conditionalRegisterSchema = step1Schema
   .superRefine((data, ctx) => {
     if (data.accountType !== "Suppliers") return;
 
+    // الموقع
     if (!data.location || data.location.length < 2) {
       ctx.addIssue({
         path: ["location"],
         code: "too_small",
         minimum: 2,
         type: "string",
-        message: "من فضلك أدخل موقعًا صالحًا",
         origin: "string",
+        message: "من فضلك أدخل موقعًا صالحًا",
       });
     }
 
+ 
     if (data.documents) {
       const docs = Array.isArray(data.documents)
         ? data.documents
@@ -134,11 +136,12 @@ export const conditionalRegisterSchema = step1Schema
         code: "too_small",
         minimum: 1,
         type: "array",
-        message: "من فضلك اختر فئة واحدة على الأقل",
         origin: "array",
+        message: "من فضلك اختر فئة واحدة على الأقل",
       });
     }
   });
+
 
 export function getStepValidationSchema(step: number, accountType?: string) {
   switch (step) {
